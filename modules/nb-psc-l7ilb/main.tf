@@ -48,8 +48,9 @@ resource "google_compute_region_backend_service" "psc_backend" {
   protocol              = "HTTPS"                             # The protocol which the Regional Backend Service should use to communicate with the backend.
   load_balancing_scheme = "INTERNAL_MANAGED"                  # The type of load balancing that this Regional Backend Service will be used for.
   backend {
-    group = var.psc_neg # PSC NEG to be used as the backend.
-  }                     # Configuration for the backends which serves this Regional Backend Service.
+    group          = var.psc_neg   # PSC NEG to be used as the backend.
+    balancing_mode = "UTILIZATION" # Balancing mode for the PSC NEG backend.
+  }                                # Configuration for the backends which serves this Regional Backend Service.
   lifecycle {
     create_before_destroy = true
   } # Lifecycle rule to tell Terraform to create a replacement object first before deleting this object in case of an update which cannot be done in-place.

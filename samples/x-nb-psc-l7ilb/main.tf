@@ -110,7 +110,7 @@ module "nb-psc-l7ilb" {
   for_each                       = local.apigee_l7ilb_regional_ingress_metadata
   source                         = "../../modules/nb-psc-l7ilb"
   project_id                     = module.project.project_id
-  vpc_network_name               = module.psc-ingress-vpc.network.id
+  vpc_network_name               = module.psc-ingress-vpc.name
   region                         = each.key
   l7_ilb_proxy_subnet_name       = each.value.l7_ilb_proxy_subnet_name
   l7_ilb_proxy_subnet_cidr_range = each.value.l7_ilb_proxy_subnet_cidr_range
